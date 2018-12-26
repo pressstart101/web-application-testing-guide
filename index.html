@@ -670,8 +670,7 @@
 						<li><a href="#0">If the application explicitly liberalizes its cookies’ scope to a parent domain or parent directory, it may be leaving itself vulnerable to attacks via other web applications that are hosted within the parent domain or directory.</a></li>
 						<li><a href="#0">If the application sets its cookies’ domain scope to its own domain name (or does not specify a domain attribute), it may still be exposed to attacks via any applications hosted on subdomains. This is a consequence of how cookie scoping works. It cannot be avoided other than by not hosting any other applications on a subdomain of a security sensitive application.</a></li>
 						<li><a href="#0">Determine any reliance on segregation by path, such as <span style="color:#ff5050">/site/main</span> and <span style="color:#ff5050">/site/demo</span>, which can be subverted in the event of a cross-site scripting attack.</a></li>
-						<li><a href="#0">Identify all the possible domain names and paths that will receive the cookies that the application issues. Establish whether any other web applications are accessible via these domain names or paths that you may be able to leverage to capture the cookies issued to users of the target application.
-</a></li>						
+						<li><a href="#0">Identify all the possible domain names and paths that will receive the cookies that the application issues. Establish whether any other web applications are accessible via these domain names or paths that you may be able to leverage to capture the cookies issued to users of the target application.</a></li>						
 					</ul>
       			</li>
 <!-- 
@@ -694,11 +693,62 @@
 						<li><a href="#0">text_2</a></li>
 					</ul>
       			</li> -->
-      		</ul>
 		</li>
+    </ul> 
+
+		<li class="has-children">
+			<input type="checkbox" name ="group-6" id="group-6">
+			<label for="group-6">6. Test Access Controls</label>
+
+      		<ul>
+
+      			<li class="has-children">
+      				<input type="checkbox" name ="sub-group-38" id="sub-group-38">
+					<label for="sub-group-38">6.1 Understand the Access Control Requirements</label>
+
+					<ul>
+						<li><a href="#0">Based on the core functionality implemented within the application, understand the broad requirements for access control in terms of vertical segregation (different levels of users have access to different types of functionality) and horizontal segregation (users at the same privilege level have access to different subsets of data). Often, both types of segregation are present. For example, ordinary users may be able to access their own data, while administrators can access everyone’s data.</a></li>
+						<li><a href="#0">Review your application mapping results to identify the areas of functionality and types of data resources that represent the most fruitful targets for privilege escalation attacks.</a></li>
+						<li><a href="#0">To perform the most effective testing for access control vulnerabilities, you should ideally obtain a number of different accounts with different vertical and horizontal privileges. If self-registration is possible, you can probably obtain the latter directly from the application. To obtain the former, you will probably need the cooperation of the application owner (or need to exploit some vulnerability to gain access to a high-privileged account). The availability of different kinds of accounts will affect the types of testing you can perform, as described next.</a></li>
+					</ul>
+      			</li>
+
+      			<li class="has-children">
+      				<input type="checkbox" name ="sub-group-39" id="sub-group-39">
+					<label for="sub-group-39">6.2 Test with Multiple Accounts</label>
+
+					<ul>
+						<li><a href="#0">If the application enforces vertical privilege segregation, first use a powerful account to locate all the functionality it can access. Then use a less-privileged account and attempt to access each item of this functionality. <br/>&emsp;<span style="color:#ff5050">&#8226;</span>  Using Burp, browse all the application’s content within one user context.<br/>&emsp;<span style="color:#ff5050">&#8226;</span>  Review the contents of Burp’s site map to ensure you have identified all the functionality you want to test. Then, log out of the application and log back in using a different user context. Use the context menu to select the <span style="color:#ff5050">compare site maps</span> feature to determine which high-privileged requests may be accessible to the lower-privileged user.</a></li>
+						<li><a href="#0">If the application enforces horizontal privilege segregation, perform the equivalent test using two different accounts at the same privilege level, attempting to use one account to access data belonging to the other account. This typically involves replacing an identifier (such as a document ID) within a request to specify a resource belonging to the other user.</a></li>
+						<li><a href="#0">Perform manual checking of key access control logic. <br/>&emsp;<span style="color:#ff5050">&#8226;</span>  For each user privilege, review resources available to a user. Attempt to access those resources from an unauthorized user account by replaying the request using the unauthorized user’s session token.</a></li>
+						<li><a href="#0">When you perform any kind of access control test, be sure to test every step of multistage functions individually to confirm whether access controls have been properly implemented at each stage, or whether the application assumes that users who access a later stage must have passed security checks implemented at the earlier stages. For example, if an administrative page containing a form is properly protected, check whether the actual form submission is also subjected to proper access controls.</a></li>
+					</ul>
+      			</li>
 
 
+      			<li class="has-children">
+      				<input type="checkbox" name ="sub-group40" id="sub-group-40">
+					<label for="sub-group-40">6.3 Test with Limited Access</label>
 
+					<ul>
+						<li><a href="#0">If you do not have prior access to accounts at different privilege levels, or to multiple accounts with access to different data, testing for broken access controls is not quite as straightforward. Many common vulnerabilities will be much harder to locate, because you do not know the names of the URLs, identifiers, and parameters that are needed to exploit the weaknesses.</a></li>
+						<li><a href="#0">In your application mapping exercises that use a low-privileged account, you may have identified the URLs for privileged functions such as administrative interfaces. If these are not adequately protected, you will probably already know about this.</a></li>
+						<li><a href="#0">Decompile all compiled clients that are present, and extract any references to server-side functionality.</a></li>
+						<li><a href="#0">Most data that is subject to horizontal access controls is accessed using an identifier, such as an account number or order reference. To test whether access controls are effective using only a single account, you must try to guess or discover the identifiers associated with other users’ data. If possible, generate a series of identifiers in quick succession (for example, by creating several new orders). Attempt to identify any patterns that may enable you to predict the identifiers issued to other users. If there is no way to generate new identifiers, you are probably restricted to analyzing those you already have and guessing on that basis.</a></li>
+						<li><a href="#0">If you find a way to predict the identifiers issued to other users, use the <span style="color:#ff5050">Extract Grep</span> function in <span style="color:#ff5050">Burp Intruder</span> to capture the relevant information from within the application’s responses.</a></li>
+					</ul>
+      			</li>
+
+      			<li class="has-children">
+      				<input type="checkbox" name ="sub-group-41" id="sub-group-41">
+					<label for="sub-group-41">6.4 Test for Insecure Access Control Methods</label>
+
+					<ul>
+						<li><a href="#0">Some applications implement access controls based on request parameters in an inherently unsafe way. Look for parameters such as <span style="color:#ff5050">edit=false</span> or <span style="color:#ff5050">access=read</span> in any key requests, and modify these in line with their apparent role to try to interfere with the application’s access control logic.</a></li>
+						<li><a href="#0">Some applications base access control decisions on the HTTP <span style="color:#ff5050">Referer header</span>. For example, an application may properly control access to <span style="color:#ff5050">/admin.jsp</span> and accept any request showing this as its <span style="color:#ff5050">Referer</span>. To test for this behavior, attempt to perform some privileged actions to which you are authorized, and submit a missing or modified <span style="color:#ff5050">Referer header</span>. If this change causes the application to block your request, it may be using the <span style="color:#ff5050">Referer</span> header in an unsafe way. Try performing the same action as an unauthorized user, but supply the original <span style="color:#ff5050">Referer</span> header and see whether the action succeeds.</a></li>
+						<li><a href="#0">If <span style="color:#ff5050">HEAD</span> is an allowed method on the site, test for insecure container-managed access control to URLs. Make a request using the <span style="color:#ff5050">HEAD</span> method to determine whether the application permits it.</a></li>
+					</ul>
+      			</li>
 
 
 <script src="js/jquery-2.1.4.js"></script>
