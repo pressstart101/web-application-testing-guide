@@ -1065,55 +1065,70 @@
 
 
 		<li class="has-children">
-			<input type="checkbox" name ="group-7" id="group-7">
-			<label for="group-7">2. Analyze the Application</label>
+			<input type="checkbox" name ="group-55" id="group-55">
+			<label for="group-55">9. Test for Logic Flaws</label>
 
       		<ul>
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-7" id="sub-group-7">
-					<label for="sub-group-7">2.1 Identify Functionality</label>
+      				<input type="checkbox" name ="sub-group-56" id="sub-group-56">
+					<label for="sub-group-56">9.1 Identify the Key Attack Surface</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">Logic flaws can take a huge variety of forms and exist within any aspect of the application’s functionality. To ensure that probing for logic flaws is feasible, you should first narrow down the attack surface to a reasonable area for manual testing.</a></li>
+						<li><a href="#0">Review the results of your application mapping exercises, and identify any instances of the following features: <br/>&emsp;<span style="color:#ff5050">&#8226;</span>Multistage processes<br/>&emsp;<span style="color:#ff5050">&#8226;</span>Critical security functions, such as login<br/>&emsp;<span style="color:#ff5050">&#8226;</span>Transitions across trust boundaries (for example, moving from being anonymous to being self-registered to being logged in)<br/>&emsp;<span style="color:#ff5050">&#8226;</span>Context-based functionality presented to a user<br/>&emsp;<span style="color:#ff5050">&#8226;</span>Checks and adjustments made to transaction prices or quantities</a></li>
+
 					</ul>
       			</li>
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-8" id="sub-group-8">
-					<label for="sub-group-8">2.2 Identify Data Entry Points</label>
+      				<input type="checkbox" name ="sub-group-57" id="sub-group-57">
+					<label for="sub-group-57">9.2 Test Multistage Processes</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">When a multistage process involves a defined sequence of requests, attempt to submit these requests out of the expected sequence. Try skipping certain stages, accessing a single stage more than once, and accessing earlier stages after later ones.</a></li>
+						<li><a href="#0">The sequence of stages may be accessed via a series of <span style="color:#ff5050">GET</span> or <span style="color:#ff5050">POST</span> requests for distinct URLs, or they may involve submitting different sets of parameters to the same URL. You may specify the stage being requested by submitting a function name or index within a request parameter. Be sure to understand fully the mechanisms that the application is employing to deliver access to distinct stages.</a></li>
+						<li><a href="#0">In addition to interfering with the sequence of steps, try taking parameters that are submitted at one stage of the process and submitting them at a different stage. If the relevant items of data are updated within the application’s state, you should investigate whether you can leverage this behavior to interfere with the application’s logic.</a></li>
+						<li><a href="#0">If a multistage process involves different users performing operations on the same set of data, try taking each parameter submitted by one user and submitting it as another. If they are accepted and processed as that user, explore the implications of this behavior, as described previously.</a></li>
+						<li><a href="#0">From the context of the functionality that is implemented, try to understand what assumptions the developers may have made and where the key attack surface lies. Try to identify ways of violating those assumptions to cause undesirable behavior within the application.</a></li>
+						<li><a href="#0">When multistage functions are accessed out of sequence, it is common to encounter a variety of anomalous conditions within the application, such as variables with null or uninitialized values, partially defined or inconsistent state, and other unpredictable behavior. Look for interesting error messages and debug output, which you can use to better understand the application’s internal workings and thereby fine-tune the current or a different attack.</a></li>						
 					</ul>
       			</li>
 
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-9" id="sub-group-9">
-					<label for="sub-group-9">2.3 Identify the Technologies Used</label>
+      				<input type="checkbox" name ="sub-group-58" id="sub-group-58">
+					<label for="sub-group-58">9.3 Test Handling of Incomplete Input</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">For critical security functions within the application, which involve processing several items of user input and making a decision based on these, test the application’s resilience to requests containing incomplete input.</a></li>
+						<li><a href="#0">For each parameter in turn, remove both the name and value of the parameter from the request. Monitor the application’s responses for any divergence in its behavior and any error messages that shed light on the logic being performed.</a></li>
+						<li><a href="#0">If the request you are manipulating is part of a multistage process, follow the process through to completion, because the application may store data submitted in earlier stages within the session and then process this at a later stage.</a></li>
 					</ul>
       			</li>
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-10" id="sub-group-10">
-					<label for="sub-group-10">2.4 Map the Attack Surface</label>
+      				<input type="checkbox" name ="sub-group-59" id="sub-group-59">
+					<label for="sub-group-59">9.4 Test Trust Boundaries</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">Probe how the application handles transitions between different types of trust of the user. Look for functionality where a user with a given trust status can accumulate an amount of state relating to his identity. For example, an anonymous user could provide personal information during self-registration, or proceed through part of an account recovery process designed to establish his identity.</a></li>
+						<li><a href="#0">Try to find ways to make improper transitions across trust boundaries by accumulating relevant state in one area and then switching to a different area in a way that would not normally occur. For example, having completed part of an account recovery process, attempt to switch to an authenticated user-specific page. Test whether the application assigns you an inappropriate level of trust when you transition in this way.</a></li>
+						<li><a href="#0">Try to determine whether you can harness any higher-privileged function directly or indirectly to access or infer information.</a></li>
 					</ul>
       			</li>
+
+      			<li class="has-children">
+      				<input type="checkbox" name ="sub-group-60" id="sub-group-60">
+					<label for="sub-group-60">9.5 Test Transaction Logic</label>
+
+					<ul>
+						<li><a href="#0">In cases where the application imposes transaction limits, test the effects of submitting negative values. If these are accepted, it may be possible to beat the limits by making large transactions in the opposite direction.</a></li>
+						<li><a href="#0">Examine whether you can use a series of successive transactions to bring about a state that you can exploit for a useful purpose. For example, you may be able to perform several low-value transfers between accounts to accrue a large balance that the application’s logic was intended to prevent.</a></li>
+						<li><a href="#0">If the application adjusts prices or other sensitive values based on criteria that are determined by user-controllable data or actions, first understand the algorithms used by the application, and the point within its logic where adjustments are made. Identify whether these adjustments are made on a one-time basis, or whether they are revised in response to further actions performed by the user.</a></li>
+						<li><a href="#0">Try to find ways to manipulate the application’s behavior to cause it to get into a state where the adjustments it has applied do not correspond to the original criteria intended by its designers.</a></li>
+					</ul>
+      			</li>      			
 </ul>
 
 
