@@ -1137,53 +1137,29 @@
 
 
 		<li class="has-children">
-			<input type="checkbox" name ="group-7" id="group-7">
-			<label for="group-7">2. Analyze the Application</label>
+			<input type="checkbox" name ="group-10" id="group-10">
+			<label for="group-10">10. Test for Shared Hosting Vulnerabilities</label>
 
       		<ul>
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-7" id="sub-group-7">
-					<label for="sub-group-7">2.1 Identify Functionality</label>
+      				<input type="checkbox" name ="sub-group-61" id="sub-group-61">
+					<label for="sub-group-61">10.1 Test Segregation in Shared Infrastructures</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">If the application is hosted in a shared infrastructure, examine the access mechanisms provided for customers of the shared environment to update and manage their content and functionality. Consider the following questions: <br/>&emsp;<span style="color:#ff5050">&#8226;</span>  Does the remote access facility use a secure protocol and suitably hardened infrastructure?<br/>&emsp;<span style="color:#ff5050">&#8226;</span>  Can customers access files, data, and other resources that they do not legitimately need to access?<br/>&emsp;<span style="color:#ff5050">&#8226;</span>  Can customers gain an interactive shell within the hosting environment and execute arbitrary commands?</a></li>
+						<li><a href="#0">If a proprietary application is used to allow customers to configure and customize a shared environment, consider targeting this application as a way to compromise the environment itself and individual applications running within it.</a></li>
+						<li><a href="#0">If you can achieve command execution, SQL injection, or arbitrary file access within one application, investigate carefully whether this provides any way to escalate your attack to target other applications.</a></li>
 					</ul>
       			</li>
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-8" id="sub-group-8">
-					<label for="sub-group-8">2.2 Identify Data Entry Points</label>
+      				<input type="checkbox" name ="sub-group-62" id="sub-group-62">
+					<label for="sub-group-62">10.2 Test Segregation Between ASP-Hosted Applications</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-					</ul>
-      			</li>
-
-
-      			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-9" id="sub-group-9">
-					<label for="sub-group-9">2.3 Identify the Technologies Used</label>
-
-					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-					</ul>
-      			</li>
-
-      			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-10" id="sub-group-10">
-					<label for="sub-group-10">2.4 Map the Attack Surface</label>
-
-					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">If the application belongs to an ASP-hosted service composed of a mix of shared and customized components, identify any shared components such as logging mechanisms, administrative functions, and database code components. Attempt to leverage these to compromise the shared portion of the application and thereby attack other individual applications.</a></li>
+						<li><a href="#0">If a common database is used within any kind of shared environment, perform a comprehensive audit of the database configuration, patch level, table structure, and permissions using a database scanning tool such as NGSSquirrel. Any defects within the database security model may provide a way to escalate an attack from within one application to another.</a></li>
 					</ul>
       			</li>
 </ul>
@@ -1193,55 +1169,94 @@
 
 
 		<li class="has-children">
-			<input type="checkbox" name ="group-7" id="group-7">
-			<label for="group-7">2. Analyze the Application</label>
+			<input type="checkbox" name ="group-11" id="group-11">
+			<label for="group-11">11. Test for Application Server Vulnerabilities</label>
 
       		<ul>
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-7" id="sub-group-7">
-					<label for="sub-group-7">2.1 Identify Functionality</label>
+      				<input type="checkbox" name ="sub-group-63" id="sub-group-63">
+					<label for="sub-group-63">11.1 Test for Default Credentials</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">Review the results of your application mapping exercises to identify the web server and other technologies in use that may contain accessible administrative interfaces.</a></li>
+						<li><a href="#0">Perform a port scan of the web server to identify any administrative interfaces running on a different port than the main target application.</a></li>
+						<li><a href="#0">For any identified interfaces, consult the manufacturer’s documentation and common default password listings to obtain default credentials.</a></li>
+						<li><a href="#0">If the default credentials do not work, use the steps listed in section 4 to attempt to guess valid credentials.</a></li>
+						<li><a href="#0">If you gain access to an administrative interface, review the available functionality and determine whether it can be used to further compromise the host and attack the main application.</a></li>
 					</ul>
       			</li>
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-8" id="sub-group-8">
-					<label for="sub-group-8">2.2 Identify Data Entry Points</label>
+      				<input type="checkbox" name ="sub-group-65" id="sub-group-65">
+					<label for="sub-group-65">11.2 Test for Default Content</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">Review the results of your Nikto scan (step 1.4 (1st)) to identify any default content that may be present on the server but that is not an integral part of the application.</a></li>
+						<li><a href="#0">Use search engines and other resources such as <span style="color:#ff5050">www.exploit-db.com</span> and <span style="color:#ff5050">www.osvdb.org</span> to identify default content and functionality included within the technologies you know to be in use. If feasible, carry out a local installation of these, and review them for any default functionality that you may be able to leverage in your attack.</a></li>
+						<li><a href="#0">Examine the default content for any functionality or vulnerabilities that you may be able to leverage to attack the server or the application.</a></li>
 					</ul>
       			</li>
 
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-9" id="sub-group-9">
-					<label for="sub-group-9">2.3 Identify the Technologies Used</label>
+      				<input type="checkbox" name ="sub-group-66" id="sub-group-66">
+					<label for="sub-group-66">11.3 Test for Dangerous HTTP Methods</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">Use the <span style="color:#ff5050">OPTIONS</span> method to list the HTTP methods that the server states are available. Note that different methods may be enabled in different directories. You can perform a vulnerability scan in Paros to perform this check.</a></li>
+						<li><a href="#0">Try each reported method manually to confirm whether it can in fact be used.</a></li>
+						<li><a href="#0">If you find that some WebDAV methods are enabled, use a WebDAV enabled client for further investigation, such as <span style="color:#ff5050">Microsoft FrontPage</span> or the Open as Web Folder option in Internet Explorer.</a></li>
 					</ul>
       			</li>
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-10" id="sub-group-10">
-					<label for="sub-group-10">2.4 Map the Attack Surface</label>
+      				<input type="checkbox" name ="sub-group-67" id="sub-group-67">
+					<label for="sub-group-67">11.4 Test for Proxy Functionality</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">Using both <span style="color:#ff5050">GET</span> and <span style="color:#ff5050">CONNECT</span> requests, try to use the web server as a proxy to connect to other servers on the Internet and retrieve content from them.</a></li>
+						<li><a href="#0">Using both <span style="color:#ff5050">GET</span> and <span style="color:#ff5050">CONNECT</span> requests, attempt to connect to different IP addresses and ports within the hosting infrastructure.</a></li>
+						<li><a href="#0">Using both <span style="color:#ff5050">GET</span> and <span style="color:#ff5050">CONNECT</span> requests, attempt to connect to common port numbers on the web server itself by specifying <span style="color:#ff5050">127.0.0.1</span> as the target host in the request.
+</a></li>
 					</ul>
       			</li>
+
+      			<li class="has-children">
+      				<input type="checkbox" name ="sub-group-68" id="sub-group-68">
+					<label for="sub-group-68">11.5 Test for Virtual Hosting Misconfiguration</label>
+
+					<ul>
+						<li><a href="#0">Submit <span style="color:#ff5050">GET</span> requests to the root directory using the following: <br/>&emsp;<span style="color:#ff5050">&#8226;</span>  The correct <span style="color:#ff5050">Host</span> header<br/>&emsp;<span style="color:#ff5050">&#8226;</span>  A bogus <span style="color:#ff5050">Host</span> header<br/>&emsp;<span style="color:#ff5050">&#8226;</span>  The server’s IP address in the <span style="color:#ff5050">Host</span> header<br/>&emsp;<span style="color:#ff5050">&#8226;</span>  No <span style="color:#ff5050">Host</span> header (use HTTP/1.0 only)</a></li>
+						<li><a href="#0">Compare the responses to these requests. A common result is that directory listings are obtained when the server’s IP address is used in the <span style="color:#ff5050">Host</span> header. You may also find that different default content is accessible.</a></li>
+						<li><a href="#0">If you observe different behavior, repeat the application mapping exercises described in section 1 using the hostname that generated different results. Be sure to perform a <span style="color:#ff5050">Nikto</span> scan using the <span style="color:#ff5050">-vhost</span> option to identify any default content that may have been overlooked during initial application mapping.</a></li>
+					</ul>
+      			</li>
+
+      			<li class="has-children">
+      				<input type="checkbox" name ="sub-group-69" id="sub-group-69">
+					<label for="sub-group-69">11.6 Test for Web Server Software Bugs</label>
+
+					<ul>
+						<li><a href="#0">Run <span style="color:#ff5050">Nessus</span> and any other similar scanners you have available to identify any known vulnerabilities in the web server software you are attacking.</a></li>
+						<li><a href="#0">If the application was developed by a third party, investigate whether it ships with its own web server (often an open source server). If it does, investigate this for any vulnerabilities. Be aware that in this case, the server’s standard banner may have been modified.</a></li>
+						<li><a href="#0">If possible, consider performing a local installation of the software you are attacking, and carry out your own testing to find new vulnerabilities that have not been discovered or widely circulated.</a></li>
+					</ul>
+      			</li> 
+      			<li class="has-children">
+      				<input type="checkbox" name ="sub-group-70" id="sub-group-70">
+					<label for="sub-group-70">11.7 Test for Web Application Firewalling</label>
+
+					<ul>
+						<li><a href="#0">Submit an arbitrary parameter name to the application with a clear attack payload in the value, ideally somewhere the application includes the name and/or value in the response. If the application blocks the attack, this is likely to be due to an external defense.</a></li>
+						<li><a href="#0">If a variable can be submitted that is returned in a server response, submit a range of fuzz strings and encoded variants to identify the behavior of the application defenses to user input.</a></li>
+						<li><a href="#0">Confirm this behavior by performing the same attacks on variables within the application.</a></li>
+						<li><a href="#0">For all fuzzing strings and requests, use payload strings that are unlikely to exist in a standard signature database. Although giving examples of these is by definition impossible, avoid using <span style="color:#ff5050">/etc/passwd</span> or <span style="color:#ff5050">/windows/ system32/config/sam</span> as payloads for file retrieval. Also avoid using terms such as <span style="color:#ff5050">&lt;script&gt; </span>in an XSS attack and using <span style="color:#ff5050">alert()</span> or <span style="color:#ff5050">xss</span> as XSS payloads.</a></li>
+						<li><a href="#0">If a particular request is blocked, try submitting the same parameter in a different location or context. For instance, submit the same parameter in the URL in a <span style="color:#ff5050">GET</span> request, within the body of a <span style="color:#ff5050">POST</span> request, and within the URL in a <span style="color:#ff5050">POST</span> request.</a></li>
+						<li><a href="#0">On ASP.NET, also try submitting the parameter as a cookie. The API <span style="color:#ff5050">Request.Params[“foo”] </span> will retrieve the value of a cookie named <span style="color:#ff5050">foo</span> if the parameter <span style="color:#ff5050">foo</span> is not found in the query string or message body.</a></li>
+						<li><a href="#0">Determine locations where user input is (or can be) submitted in a nonstandard format such as serialization or encoding. If none is available, build the attack string by concatenation and/or by spanning it across multiple variables. (Note that if the target is ASP.NET, you may be able to use HPP to concatenate the attack using multiple specifications of the same variable.)</a></li>
+					</ul>
+      			</li>       			     			
 </ul>
 
 
