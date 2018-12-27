@@ -1268,53 +1268,57 @@
 
 
 		<li class="has-children">
-			<input type="checkbox" name ="group-7" id="group-7">
-			<label for="group-7">2. Analyze the Application</label>
+			<input type="checkbox" name ="group-12" id="group-12">
+			<label for="group-12">12. Miscellaneous Checks</label>
 
       		<ul>
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-7" id="sub-group-7">
-					<label for="sub-group-7">2.1 Identify Functionality</label>
+      				<input type="checkbox" name ="sub-group-71" id="sub-group-71">
+					<label for="sub-group-71">12.1 Check for DOM-Based Attacks</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">Perform a brief code review of every piece of JavaScript received from the application. Identify any XSS or redirection vulnerabilities that can be triggered by using a crafted URL to introduce malicious data into the DOM of the relevant page. Include all standalone JavaScript files and scripts contained within HTML pages (both static and dynamically generated).</a></li>
+						<li><a href="#0">Identify all uses of the following APIs, which may be used to access DOM data that can be controlled via a crafted URL:<br/><span style="color:#ff5050">document.location</span><br/><span style="color:#ff5050">document.URL</span><br/><span style="color:#ff5050">document.URLUnencoded</span><br/><span style="color:#ff5050">document.referrer</span><br/><span style="color:#ff5050">window.location</span></a></li>
+						<li><a href="#0">Trace the relevant data through the code to identify what actions are performed with it. If the data (or a manipulated form of it) is passed to one of the following APIs, the application may be vulnerable to XSS: <br/><span style="color:#ff5050">document.write()</span><br/><span style="color:#ff5050">document.writeln()</span><br/><span style="color:#ff5050">document.body.innerHtml</span><br/><span style="color:#ff5050">eval()</span><br/><span style="color:#ff5050">window.execScript()</span><br/><span style="color:#ff5050">window.setInterval()</span><br/><span style="color:#ff5050">window.setTimeout()</span></a></li>
+						<li><a href="#0">If the data is passed to one of the following APIs, the application may be vulnerable to a redirection attack: <br/><span style="color:#ff5050">document.location</span><br/><span style="color:#ff5050">document.URL</span><br/><span style="color:#ff5050">document.open()</span><br/><span style="color:#ff5050">window.location.href</span><br/><span style="color:#ff5050">window.navigate()</span><br/><span style="color:#ff5050">window.open()</span></a></li>
 					</ul>
       			</li>
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-8" id="sub-group-8">
-					<label for="sub-group-8">2.2 Identify Data Entry Points</label>
+      				<input type="checkbox" name ="sub-group-72" id="sub-group-72">
+					<label for="sub-group-72">12.2 Check for Local Privacy Vulnerabilities</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">Review the logs created by your intercepting proxy to identify all the <span style="color:#ff5050">Set-Cookie</span> directives received from the application during your testing. If any of these contains an <span style="color:#ff5050">expires</span> attribute with a date that is in the future, the cookie will be stored by users’ browsers until that date. Review the contents of any persistent cookies for sensitive data.</a></li>
+						<li><a href="#0">If a persistent cookie is set that contains any sensitive data, a local attacker may be able to capture this data. Even if the data is encrypted, an attacker who captures it will be able to resubmit the cookie to the application and gain access to any data or functionality that this allows.</a></li>
+						<li><a href="#0">If any application pages containing sensitive data are accessed over HTTP, look for any cache directives within the server’s responses. If any of the following directives do not exist (either within the HTTP headers or within HTML metatags), the page concerned may be cached by one or more browsers:<br/><span style="color:#ff5050">Expires: 0</span><br/><span style="color:#ff5050">Cache-control: no-cache</span><br/><span style="color:#ff5050">Pragma: no-cache</span></a></li>
+						<li><a href="#0">Identify any instances within the application in which sensitive data is transmitted via a URL parameter. If any cases exist, examine the browser history to verify that this data has been stored there.</a></li>
+						<li><a href="#0">For all forms that are used to capture sensitive data from the user (such as credit card details), review the form’s HTML source. If the attribute <span style="color:#ff5050">autocomplete=off</span> is not set, within either the form tag or the tag for the individual input field, data entered is stored within browsers that support autocomplete, provided that the user has not disabled this feature.</a></li>
+						<li><a href="#0">Check for technology-specific local storage. <br/>&emsp;<span style="color:#ff5050">&#8226;</span>  Check for Flash local objects using the BetterPrivacy plug-in for Firefox.<br/>&emsp;<span style="color:#ff5050">&#8226;</span>  Check any Silverlight isolated storage in this directory: <span style="color:#ff5050">C:\Users\{username}\AppData\LocalLow\Microsoft\Silverlight\</span><br/>&emsp;<span style="color:#ff5050">&#8226;</span>  Check any use of HTML5 local storage.</a></li>						
 					</ul>
       			</li>
 
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-9" id="sub-group-9">
-					<label for="sub-group-9">2.3 Identify the Technologies Used</label>
+      				<input type="checkbox" name ="sub-group-73" id="sub-group-73">
+					<label for="sub-group-73">12.3 Check for Weak SSL Ciphers</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">If the application uses SSL for any of its communications, use the tool <span style="color:#ff5050">THCSSLCheck</span> to list the ciphers and protocols supported.</a></li>
+						<li><a href="#0">If any weak or obsolete ciphers and protocols are supported, a suitably positioned attacker may be able to perform an attack to downgrade or decipher the SSL communications of an application user, gaining access to his sensitive data.</a></li>
+						<li><a href="#0">Some web servers advertise certain weak ciphers and protocols as supported but refuse to actually complete a handshake using these if a client requests them. This can lead to false positives when you use the <span style="color:#ff5050">THCSSLCheck tool</span>. You can use browser to attempt to perform a complete handshake using specified weak protocols to confirm whether these can actually be used to access the application.</a></li>
 					</ul>
       			</li>
 
       			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-10" id="sub-group-10">
-					<label for="sub-group-10">2.4 Map the Attack Surface</label>
+      				<input type="checkbox" name ="sub-group-74" id="sub-group-74">
+					<label for="sub-group-74">12.4 Check Same-Origin Policy Configuration</label>
 
 					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
+						<li><a href="#0">Check for the <span style="color:#ff5050">/crossdomain.xml</span> file. If the application allows unrestricted access (by specifying <span style="color:#ff5050"><allow-access-from domain=”*” /></span>), Flash objects from any other site can perform two-way interaction, riding on the sessions of application users. This would allow all data to be retrieved, and any user actions to be performed, by any other domain.</a></li>
+						<li><a href="#0">Check for the <span style="color:#ff5050">/clientaccesspolicy.xml</span> file. Similar to Flash, if the <span style="color:#ff5050">&lt;cross-domain-access&gt; </span>configuration is too permissive, other sites can perform two-way interaction with the site under assessment.</a></li>
+						<li><a href="#0">Test an application’s handling of cross-domain requests using <span style="color:#ff5050">XMLHttpRequest</span> by adding an <span style="color:#ff5050">Origin</span> header specifying a different domain and examining any <span style="color:#ff5050">Access-Control</span> headers that are returned. The security implications of allowing two-way access from any domain, or from specified other domains, are the same as those described for the Flash cross-domain policy.</a></li>
 					</ul>
       			</li>
 </ul>
@@ -1326,56 +1330,17 @@
 
 
 		<li class="has-children">
-			<input type="checkbox" name ="group-7" id="group-7">
-			<label for="group-7">2. Analyze the Application</label>
+			<input type="checkbox" name ="group-13" id="group-13">
+			<label for="group-13">13. Follow Up Any Information Leakage</label>
 
       		<ul>
+						<li><a href="#0">In all your probing of the target application, monitor its responses for error messages that may contain useful information about the error’s cause, the technologies in use, and the application’s internal structure and functionality.</a></li>
+						<li><a href="#0">If you receive any unusual error messages, investigate these using standard search engines. You can use various advanced search features to narrow down your results. For example: <br/><span style="color:#ff5050">“unable to retrieve” filetype:php</span> </a></li>
+						<li><a href="#0">Review the search results, looking both for any discussion about the error message and for any other websites in which the same message has appeared. Other applications may produce the same message in a more verbose context, enabling you to better understand what kind of conditions give rise to the error. Use the search engine cache to retrieve examples of error messages that no longer appear within the live application.</a></li>
+						<li><a href="#0">Use Google code search to locate any publicly available code that may be responsible for a particular error message. Search for snippets of error messages that may be hard-coded into the application’s source code. You can also use various advanced search features to specify the code language and other details, if these are known. For example: <br/><span style="color:#ff5050">unable\ to\ retrieve lang:php package:mail</span> </a></li>
+						<li><a href="#0">If you receive error messages with stack traces containing the names of library and third-party code components, search for these names on both types of search engine.</a></li>
 
-      			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-7" id="sub-group-7">
-					<label for="sub-group-7">2.1 Identify Functionality</label>
-
-					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-					</ul>
-      			</li>
-
-      			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-8" id="sub-group-8">
-					<label for="sub-group-8">2.2 Identify Data Entry Points</label>
-
-					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-					</ul>
-      			</li>
-
-
-      			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-9" id="sub-group-9">
-					<label for="sub-group-9">2.3 Identify the Technologies Used</label>
-
-					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-					</ul>
-      			</li>
-
-      			<li class="has-children">
-      				<input type="checkbox" name ="sub-group-10" id="sub-group-10">
-					<label for="sub-group-10">2.4 Map the Attack Surface</label>
-
-					<ul>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-						<li><a href="#0">aaa</a></li>
-					</ul>
-      			</li>
-</ul>
+			</ul>
 
 
 
